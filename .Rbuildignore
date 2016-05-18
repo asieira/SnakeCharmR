@@ -1,9 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-<<<<<<< HEAD
-=======
 ^README\.Rmd$
 ^README-.*\.png$
 ^autom4te\.cache$
 ^snaker\.jpg$
->>>>>>> master
