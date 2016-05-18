@@ -1,5 +1,25 @@
-LINUX AND UNIX-LIKE SYSTEMS
-===========================
+---
+output: github_document
+---
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-",
+  fig.retina = 2
+)
+```
+
+<img src="snaker.jpg" width="33%"/>
+
+## SnakeCharmR
+
+Modern overhaul of `rPython`.
+
+You need a compiler and also these caveats:
+
+### LINUX AND UNIX-LIKE SYSTEMS
 
 Package SnakeCharmR depends on Python (>= 2.7).
 
@@ -10,26 +30,24 @@ In systems where several Python versions coexist, the user can choose the Python
 to use at installation time. By default, the package will be installed using the Python
 version given by
 
-$ python --version
+    $ python --version
 
 but it is possible to select a different one if the RPYTHON_PYTHON_VERSION environment 
 variable is appropriately set.
 
 For instance, if it is defined as
 
-RPYTHON_PYTHON_VERSION=3.2
+    RPYTHON_PYTHON_VERSION=3.2
 
 it will try to use Python 3.2 (looking for python3.2 and python3.2-config in the path). If
 set to
 
-RPYTHON_PYTHON_VERSION=3
+    RPYTHON_PYTHON_VERSION=3
 
 it will install against the "canonical" Python version in the system within the 3.x branch.
 
 
+### WINDOWS SYSTEMS
 
-WINDOWS SYSTEMS
-===============
-
-On a Windows system, the package can be installed from https://github.com/cjgb/rPython-win. 
+On a Windows system, the package can be installed from <https://github.com/cjgb/rPython-win>. 
 It is the same source code and comes with specific platform instructions.

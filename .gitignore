@@ -3,4 +3,4 @@ autom4te.cache/*
 *.so
 config.log
 config.status
-*.Rproj
+.Rproj.user
