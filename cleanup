@@ -1,0 +1,9 @@
+#!/bin/sh
+
+rm src/*.o
+rm src/*.so
+rm src/Makevars
+rm config.log
+rm config.status
+rm configure
+autoconf

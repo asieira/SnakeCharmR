@@ -1,0 +1,4 @@
+# Required vars
+PKG_LIBS=-L/usr/local/Cellar/python/2.7.11/Frameworks/Python.framework/Versions/2.7/lib/python2.7/config -lpython2.7 -ldl -framework CoreFoundation
+#PKG_CFLAGS=@PKG_CFLAGS@
+PKG_CPPFLAGS=-I/usr/local/Cellar/python/2.7.11/Frameworks/Python.framework/Versions/2.7/include/python2.7 -I/usr/local/Cellar/python/2.7.11/Frameworks/Python.framework/Versions/2.7/include/python2.7 -D PYTHONLIBFILE=libpython2.7.so
