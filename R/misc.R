@@ -6,13 +6,11 @@
 }
 
 .onLoad <- function(libname, pkgname) {
-  library.dynam("SnakeCharmR", pkgname, libname)
   rcpp_Py_Initialize()
 }
 
 .onUnload <- function(libpath) {
   rcpp_Py_Finalize()
-  library.dynam.unload("SnakeCharmR", libpath)
 }
 
 .py.toJSON <- function(x, json.options = list()) {

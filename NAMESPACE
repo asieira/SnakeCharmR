@@ -1,3 +1,4 @@
+useDynLib(SnakeCharmR)
 importFrom(Rcpp, evalCpp)
 importFrom(jsonlite, fromJSON, toJSON)
 importFrom(stringr, str_replace_all, regex, str_split)
