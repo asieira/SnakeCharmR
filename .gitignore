@@ -1,6 +1,9 @@
 autom4te.cache/*
+src/Makevars
+configure
 *.o
 *.so
 config.log
 config.status
 .Rproj.user
+.Rhistory
