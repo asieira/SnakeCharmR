@@ -1,3 +1,25 @@
+#' Assign and get variables in Python from R
+#' 
+#' Functions that assign and get Python variables from R.
+#' 
+#' These functions can assign values to variables in Python as well as get
+#' their values back to R.  Objects are serialized as json strings while being
+#' transferred between R and Python.
+#' 
+#' @param var.name a character string containing a valid python variable name
+#' @param json.opt.ret explicit arguments to pass for JSON transformation
+#' @return Function \code{py.get} returns a R version of the Python variable \code{py.var}.
+#' @references \url{http://code.google.com/p/simplejson}
+#' @keywords manip
+#' @export
+#' @examples
+#' a <- 1:4
+#' py.assign( "a", a )
+#' py.exec( "b = len( a )" )
+#' py.get( "b" )
+#' 
+#' py.exec( "import math" )
+#' py.get( "math.pi" )
 py.get <- function(var.name, json.opt.ret = getOption("SnakeCharmR.json.opt.ret", list())) {
   # parameter validation
   if (missing(var.name) || !is.character(var.name) || is.na(var.name) || length(var.name) != 1)

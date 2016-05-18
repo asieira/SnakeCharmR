@@ -1,3 +1,42 @@
+#' Calls Python functions and methods from R
+#' 
+#' This function runs a Python function taking as arguments R objects and
+#' returning an R object.  Some limitations exist as to the nature of the
+#' objects that can be passed between R and Python.  As of this writing, atomic
+#' arguments and vectors are supported.
+#' 
+#' The user has to be careful to indicate named parameters as required
+#' according to Python conventions.
+#' 
+#' @param fname name of function/method to call
+#' @param ...  R objects to pass as arguments to the Python function or method
+#' @param json.opt.args explicit arguments to pass for JSON transformation
+#' @param json.opt.ret explicit arguments to pass for JSON transformation
+#' @return An R representation of the object returned by the call to the Python function.
+#' @keywords manip
+#' @export
+#' @examples
+#' py.call( "len", 1:3 )
+#' a <- 1:4
+#' b <- 5:8
+#' py.exec( "def concat(a,b): return a+b" )
+#' py.call( "concat", a, b)
+#' 
+#' py.assign( "a",  "hola hola" )
+#' py.call( "a", "split", " " )
+#' 
+#' ## simplification of arguments
+#' a <- 1
+#' b <- 5:8
+#' 
+#' \dontrun{
+#' py.call("concat", a, b)}
+#' 
+#' # using function I()
+#' py.call("concat", I(a), b)
+#' 
+#' # setting as.is = TRUE
+#' py.call("concat", a, b, as.is = TRUE)
 py.call <- function(fname, ...,
                     json.opt.args = getOption("SnakeCharmR.json.opt.args", list()),
                     json.opt.ret = getOption("SnakeCharmR.json.opt.ret", list())) {

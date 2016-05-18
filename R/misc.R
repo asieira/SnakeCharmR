@@ -6,7 +6,6 @@
 }
 
 .onLoad <- function(libname, pkgname) {
-  library.dynam("SnakeCharmR", pkgname, libname)
   rcpp_Py_Initialize()
 }
 
