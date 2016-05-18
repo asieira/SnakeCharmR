@@ -3,3 +3,4 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^autom4te\.cache$
+^snaker\.jpg$
