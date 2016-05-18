@@ -6,7 +6,4 @@ configure
 config.log
 config.status
 .Rproj.user
-<<<<<<< HEAD
 .Rhistory
-=======
->>>>>>> master
