@@ -1,2 +1,36 @@
-# SnakeCharmR
-SnakeCharmR - R and Python Integration
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+<img src="snaker.jpg" width="33%"/>
+
+SnakeCharmR
+-----------
+
+Modern overhaul of `rPython`.
+
+You need a compiler and also these caveats:
+
+### LINUX AND UNIX-LIKE SYSTEMS
+
+Package SnakeCharmR depends on Python (&gt;= 2.7).
+
+It requires both Python and its headers and libraries. These can be found in python and python-dev packages in Debian-like Linux distributions.
+
+In systems where several Python versions coexist, the user can choose the Python version to use at installation time. By default, the package will be installed using the Python version given by
+
+    $ python --version
+
+but it is possible to select a different one if the RPYTHON\_PYTHON\_VERSION environment variable is appropriately set.
+
+For instance, if it is defined as
+
+    RPYTHON_PYTHON_VERSION=3.2
+
+it will try to use Python 3.2 (looking for python3.2 and python3.2-config in the path). If set to
+
+    RPYTHON_PYTHON_VERSION=3
+
+it will install against the "canonical" Python version in the system within the 3.x branch.
+
+### WINDOWS SYSTEMS
+
+On a Windows system, the package can be installed from <https://github.com/cjgb/rPython-win>. It is the same source code and comes with specific platform instructions.
