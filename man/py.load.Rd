@@ -2,37 +2,29 @@
 % Please edit documentation in R/py.load.R
 \name{py.load}
 \alias{py.load}
-\title{Executes Python code.}
+\title{Reads and executes Python code from a file}
 \usage{
-py.load(file, get.exception = TRUE)
+py.load(file, stopOnException = TRUE)
 }
 \arguments{
-\item{file}{a file containing python code to be executed}
+\item{file}{a connection or file name that will be passed to \code{readLines} to
+read the Python code in the file}
 
-\item{get.exception}{logical value indicating whether to check or not for
-exceptions in Python}
+\item{stopOnException}{logical value indicating whether to check or not to
+call \code{stop} if a Python exception occurs}
 }
 \value{
-None.  If the code produces some output, it is up to the caller to
-go and fetch if from Python using function \code{\link{py.get}}.
+if \code{stopOnException} is \code{FALSE}, invisibly returns a string
+representation of any raised Python exceptions or NULL if none occur.
 }
 \description{
-This function runs Python code contained in a file.  Typically, this file
-would contain functions to be called via \code{\link{py.call}} or other
-functions in this package.
+This function runs Python code contained in a file. This is basically
+a convenience function that is the equivalent of \code{py.exec(readLines(file))}.
 }
 \details{
-The \code{get.exception} option allows the user to disregard Python
-exceptions in cases where safe calls to avoid the overhead of checking for
-them.
+For better maintainability, it might be worth investigating concentrating
+more complex Python code that needs to be called from R into proper packages
+that can be installed using \code{pip} and loaded with 
+\code{py.exec("import package_name")}.
 }
-\examples{
-a <- 1:4
-b <- 5:8
-
-# this file contains the definition of function concat
-py.load( system.file( "concat.py", package = "rPython" ) )
-py.call( "concat", a, b)
-}
-\keyword{manip}
 
