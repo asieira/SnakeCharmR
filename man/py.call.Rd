@@ -5,52 +5,58 @@
 \title{Calls Python functions and methods from R}
 \usage{
 py.call(fname, ..., json.opt.args = getOption("SnakeCharmR.json.opt.args",
-  list()), json.opt.ret = getOption("SnakeCharmR.json.opt.ret", list()))
+  list(auto_unbox = TRUE)),
+  json.opt.ret = getOption("SnakeCharmR.json.opt.ret", list()))
 }
 \arguments{
 \item{fname}{name of function/method to call}
 
 \item{...}{R objects to pass as arguments to the Python function or method}
 
-\item{json.opt.args}{explicit arguments to pass for JSON transformation}
+\item{json.opt.args}{explicit arguments to pass to \code{jsonlite::toJSON} 
+when serializing the function argument values}
 
-\item{json.opt.ret}{explicit arguments to pass for JSON transformation}
+\item{json.opt.ret}{explicit arguments to pass to \code{jsonlite::fromJSON} 
+when deserializing the function return value}
 }
 \value{
-An R representation of the object returned by the call to the Python function.
+an R object containing the function or method call return value after
+serialization to JSON in the Python environment and deserialization from JSON
+in the R environment
 }
 \description{
 This function runs a Python function taking as arguments R objects and
 returning an R object.  Some limitations exist as to the nature of the
-objects that can be passed between R and Python.  As of this writing, atomic
-arguments and vectors are supported.
-}
-\details{
-The user has to be careful to indicate named parameters as required
-according to Python conventions.
+objects that can be passed between R and Python, mainly which data types
+can be converted to/from JSON in R (using \code{jsonlite}) and Python
+(using the \code{json} module).
 }
 \examples{
-py.call( "len", 1:3 )
+py.call("len", 1:3)
+# [1] 3
+
+py.call("repr", 1:3)
+# [1] "[1, 2, 3]"
+
 a <- 1:4
 b <- 5:8
-py.exec( "def concat(a,b): return a+b" )
-py.call( "concat", a, b)
+py.exec("def concat(a,b): return a+b")
+py.call("concat", a, b)
+# [1] 1 2 3 4 5 6 7 8
 
-py.assign( "a",  "hola hola" )
-py.call( "a", "split", " " )
+py.assign("a",  "hola hola")
+py.call("a.split", " ")
+# [1] "hola" "hola"
 
-## simplification of arguments
-a <- 1
-b <- 5:8
+# by default jsonlite::toJSON is called on the function call arguments
+# with auto_unbox = TRUE, so vectors of length 1 are simplified to
+# scalar values in Python
+py.call("repr", "foo bar")
+# [1] "u'foo bar'"
 
-\dontrun{
-py.call("concat", a, b)}
-
-# using function I()
-py.call("concat", I(a), b)
-
-# setting as.is = TRUE
-py.call("concat", a, b, as.is = TRUE)
+# if we explicitly set auto_unbox to FALSE, a vector of length 1
+# becomes a Python list of length 1
+py.call("repr", "foo bar", json.opt.args = list(auto_unbox = FALSE))
+# [1] "[u'foo bar']"
 }
-\keyword{manip}
 

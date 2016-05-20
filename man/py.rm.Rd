@@ -2,18 +2,26 @@
 % Please edit documentation in R/py.rm.R
 \name{py.rm}
 \alias{py.rm}
-\title{Remove a python variable}
+\title{Remove a Python variable from R}
 \usage{
 py.rm(var.name)
 }
 \arguments{
-\item{var.name}{a character string containing a valid python variable name}
-}
-\value{
-invisible result of python `del` operation.
+\item{var.name}{a character string containing a valid Python variable name}
 }
 \description{
-Remove a python variable
+This function uses the \code{del} Python command to remove a variable and reclaim
+its memory. Any exceptions, such as the one that would happen if the variable did
+not exist, will be caught and ignored.
 }
-\keyword{manip}
+\examples{
+py.assign("a", "foo bar")
+py.get("a")
+# [1] "foo bar"
+\dontrun{
+py.rm("a")
+py.get("a")
+# Error in py.get("a") (from py.get.R#56) : NameError("name 'a' is not defined",)
+}
+}
 

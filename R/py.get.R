@@ -1,25 +1,36 @@
-#' Assign and get variables in Python from R
+#' Get values from Python variables to R
 #' 
-#' Functions that assign and get Python variables from R.
+#' \code{py.get} get the value of Python and returns it to the R environment.
+#' Objects are serialized as JSON strings on Python with \code{json.dumps},
+#' are transferred to R and are converted back to an R value using
+#' \code{jsonlite::fromJSON}.
 #' 
-#' These functions can assign values to variables in Python as well as get
-#' their values back to R.  Objects are serialized as json strings while being
-#' transferred between R and Python.
-#' 
-#' @param var.name a character string containing a valid python variable name
-#' @param json.opt.ret explicit arguments to pass for JSON transformation
-#' @return Function \code{py.get} returns a R version of the Python variable \code{py.var}.
-#' @references \url{http://code.google.com/p/simplejson}
-#' @keywords manip
+#' @param var.name a character string containing a valid Python variable name
+#' @param json.opt.ret explicit arguments to pass to \code{jsonlite::fromJSON} 
+#' when deserializing the value
+#' @return an R object containing the variable value after serialization to JSON
+#' in the Python environment and deserialization from JSON in the R environment
 #' @export
 #' @examples
-#' a <- 1:4
-#' py.assign( "a", a )
-#' py.exec( "b = len( a )" )
-#' py.get( "b" )
+#' py.assign("a", 1:4)
+#' py.get("a")
+#' # [1] 1 2 3 4
 #' 
-#' py.exec( "import math" )
-#' py.get( "math.pi" )
+#' py.assign("b", list(one = 1, foo = "bar"))
+#' str(py.get("b"))
+#' # List of 2
+#' #  $ foo: chr "bar"
+#' #  $ one: int 1
+#' 
+#' py.exec("import math")
+#' py.get("math.pi")
+#' # [1] 3.141593
+#' 
+#' \dontrun{
+#' py.rm("notset")
+#' py.get("notset")
+#' # Error in py.get("notset") (from py.get.R#56) : NameError("name 'notset' is not defined",)
+#' }
 py.get <- function(var.name, json.opt.ret = getOption("SnakeCharmR.json.opt.ret", list())) {
   # parameter validation
   if (missing(var.name) || !is.character(var.name) || is.na(var.name) || length(var.name) != 1)
@@ -28,16 +39,26 @@ py.get <- function(var.name, json.opt.ret = getOption("SnakeCharmR.json.opt.ret"
     stop("Bad json.opt.ret parameter")
 
   # get variable value
-  on.exit(py.rm("_SnakeCharmR_return"))
-  py.exec(sprintf("_SnakeCharmR_return = json.dumps(%s)", var.name))
+  rcpp_Py_run_code(
+    sprintf("try:\n    _SnakeCharmR_return = json.dumps(%s)\nexcept BaseException as e:\n    _SnakeCharmR_exception = json.dumps(repr(e))", 
+            var.name)
+  )
 
+  # try to read the return value
   retval = rcpp_Py_get_var("_SnakeCharmR_return")
-  if (is.na(retval))
-      stop(
-        sprintf("Unexpected error reading %s, JSON encoded return value does not exist",
-                var.name)
-      )
+  if (!is.na(retval)) {
+    py.rm("_SnakeCharmR_return")
+    return(.py.fromJSON(retval, json.opt.ret))
+  }
 
-  return(.py.fromJSON(retval, json.opt.ret))
+  # value does not exist, stop with the exception value
+  exception = rcpp_Py_get_var("_SnakeCharmR_exception")
+  if (is.na(exception))
+    stop(
+      sprintf("Unexpected error reading %s, JSON encoded return value nor exception exist",
+              var.name)
+    )
+  py.rm("_SnakeCharmR_exception")
+  stop(.py.fromJSON(exception))
 }
 
