@@ -1,6 +1,6 @@
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage(
-    c("SnakeCharmR v1.0.0 - R and Python Integration\n",
+    c("SnakeCharmR v1.0.1 - R and Python Integration\n",
       "Contribute and submit issues at https://github.com/asieira/SnakeCharmR")
   )
 }
@@ -14,11 +14,12 @@
 }
 
 .py.toJSON <- function(x, json.options = list()) {
-  json.options$x <- x
+  if (is.null(x))
+    return("None")
   paste0(
     "json.loads('''",
     str_replace_all(
-      do.call(toJSON, json.options),
+      do.call(toJSON, c(json.options, list(x = x))),
       regex("(['\\\\])"),
       "\\\\\\1"
     ),
@@ -27,6 +28,5 @@
 }
 
 .py.fromJSON <- function(x, json.options = list()) {
-  json.options$txt = x
-  do.call(fromJSON, json.options)
+  do.call(fromJSON, c(json.options, list(txt = x)))
 }

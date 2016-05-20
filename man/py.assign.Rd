@@ -6,7 +6,7 @@
 \usage{
 py.assign(var.name, value,
   json.opt.args = getOption("SnakeCharmR.json.opt.args", list(auto_unbox =
-  TRUE)))
+  TRUE, null = "null")))
 }
 \arguments{
 \item{var.name}{a character string containing a valid Python variable name}
