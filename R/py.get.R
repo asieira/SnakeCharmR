@@ -29,7 +29,9 @@
 #' \dontrun{
 #' py.rm("notset")
 #' py.get("notset")
-#' # Error in py.get("notset") (from py.get.R#56) : NameError("name 'notset' is not defined",)
+#' # Error in py.get("notset") (from py.get.R#60) : Traceback (most recent call last):
+#' #   File "<string>", line 2, in <module>
+#' # NameError: name 'notset' is not defined
 #' }
 py.get <- function(var.name, json.opt.ret = getOption("SnakeCharmR.json.opt.ret", list())) {
   # parameter validation
@@ -40,7 +42,7 @@ py.get <- function(var.name, json.opt.ret = getOption("SnakeCharmR.json.opt.ret"
 
   # get variable value
   rcpp_Py_run_code(
-    sprintf("try:\n    _SnakeCharmR_return = json.dumps(%s)\nexcept BaseException as e:\n    _SnakeCharmR_exception = json.dumps(repr(e))", 
+    sprintf("try:\n    _SnakeCharmR_return = json.dumps(%s)\nexcept:\n    _SnakeCharmR_exception = traceback.format_exc()", 
             var.name)
   )
 
@@ -54,11 +56,9 @@ py.get <- function(var.name, json.opt.ret = getOption("SnakeCharmR.json.opt.ret"
   # value does not exist, stop with the exception value
   exception = rcpp_Py_get_var("_SnakeCharmR_exception")
   if (is.na(exception))
-    stop(
-      sprintf("Unexpected error reading %s, JSON encoded return value nor exception exist",
-              var.name)
-    )
+    stop(sprintf("Unexpected error reading %s, JSON encoded return value nor exception exist",
+                 var.name))
   py.rm("_SnakeCharmR_exception")
-  stop(.py.fromJSON(exception))
+  stop(exception)
 }
 
