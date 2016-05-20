@@ -72,14 +72,16 @@ py.call <- function(fname, ...,
   rm(foo.args, foo.args.names)
 
   # execute function
-  on.exit(py.rm("_SnakeCharmR_return"))
-  py.exec(sprintf("_SnakeCharmR_return = json.dumps(%s(%s))", fname, foo.args.string))
+  py.exec(sprintf("_SnakeCharmR_return = json.dumps(%s(%s))", fname, foo.args.string),
+          stopOnException = TRUE)
   rm(foo.args.string)
 
   # get return value
   retval <- rcpp_Py_get_var("_SnakeCharmR_return")
   if (is.na(retval))
     stop("Cannot find function call return value")
+  else
+    py.rm("_SnakeCharmR_return")
 
   return(.py.fromJSON(retval, json.opt.ret))
 }

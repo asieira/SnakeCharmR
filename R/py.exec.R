@@ -10,11 +10,8 @@
 #' 
 #' @param code a character vector containing Python code, typically a
 #' single line with indentation and EOL characters as required by Python syntax
-#' @param stopOnException logical value indicating whether or not to call \code{stop}
-#' if a Python exception occurs
-#' @return if \code{stopOnException} is \code{FALSE}, returns a character vector of
-#' length 1 with a representation of any raised Python exceptions. Otherwise, returns 
-#' NULL invisibly.
+#' @param stopOnException if \code{TRUE} then \code{stop} will be called if a 
+#' Python exception occurs, otherwise only a warning will be flagged
 #' @keywords manip
 #' @export
 #' @examples
@@ -31,13 +28,11 @@
 #' }
 #' 
 #' py.exec("raise Exception('Houston, we have a problem!')", stopOnException = FALSE)
-#' # [1] "Exception('Houston, we have a problem!',)"
-#' 
-#' str(py.exec("a = 'nothing to see here'"))
-#' #  NULL
+#' # Warning message:
+#' # In py.exec("raise Exception('Houston, we have a problem!')", stopOnException = FALSE) :
+#' #   Exception('Houston, we have a problem!',)
 py.exec <- function(code, stopOnException = TRUE) {
   # execute code with exception handling
-  on.exit(py.rm("_SnakeCharmR_exception"))
   rcpp_Py_run_code(
     sprintf(
       "try:\n%s\nexcept BaseException as e:\n    _SnakeCharmR_exception = json.dumps(repr(e))",
@@ -47,16 +42,17 @@ py.exec <- function(code, stopOnException = TRUE) {
   )
 
   # try to read the stored exception
-  retval = rcpp_Py_get_var("_SnakeCharmR_exception")
-  if (!is.na(retval)) {
-    retval = .py.fromJSON(retval)
+  exception = rcpp_Py_get_var("_SnakeCharmR_exception")
+  if (!is.na(exception)) {
+    py.rm("_SnakeCharmR_exception")
+    exception = .py.fromJSON(exception)
     if (stopOnException)
-      stop(retval)
-  } else {
-    retval <- invisible(NULL)
+      stop(exception)
+    else
+      warning(exception)
   }
 
-  return(retval)
+  return(invisible(NULL))
 }
 
 
