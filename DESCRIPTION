@@ -1,10 +1,11 @@
 Package: SnakeCharmR
 Version: 1.0.0
-Date: 2016-11-18
+Date: 2016-05-20
 Title: R and Python Integration
 Author: Alexandre Sieira, forked off of rPython by Carlos J. Gil Bellosta
 Maintainer: Alexandre Sieira <alexandre.sieira@gmail.com>
-Description: A fork from rPython which uses jsonlite, Rcpp and has several fixes and improvements.
+Description: Run 'Python' code, make function calls, assign and retrieve variables, etc. from R.
+    A fork from 'rPython' which uses 'jsonlite', 'Rcpp' and has several fixes and improvements.
 Imports:
     jsonlite (>= 0.9.20),
     stringr (>= 1.0.0),

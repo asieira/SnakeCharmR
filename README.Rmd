@@ -10,6 +10,7 @@ knitr::opts_chunk$set(
   fig.retina = 2
 )
 ```
+[![Travis-CI Build Status](https://travis-ci.org/asieira/SnakeCharmR.svg?branch=master)](https://travis-ci.org/asieira/SnakeCharmR)
 
 <img src="snaker.jpg" width="33%"/>
 
