@@ -18,8 +18,10 @@ not exist, will be caught and ignored.
 py.assign("a", "foo bar")
 py.get("a")
 # [1] "foo bar"
+\dontrun{
 py.rm("a")
 py.get("a")
 # Error in py.get("a") (from py.get.R#56) : NameError("name 'a' is not defined",)
+}
 }
 

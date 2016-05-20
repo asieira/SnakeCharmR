@@ -10,9 +10,11 @@
 #' py.assign("a", "foo bar")
 #' py.get("a")
 #' # [1] "foo bar"
+#' \dontrun{
 #' py.rm("a")
 #' py.get("a")
 #' # Error in py.get("a") (from py.get.R#56) : NameError("name 'a' is not defined",)
+#' }
 py.rm <- function(var.name) {
   # parameter validation
   if (missing(var.name) || !is.character(var.name) || is.na(var.name) || length(var.name) != 1)
