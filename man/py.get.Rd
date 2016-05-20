@@ -2,37 +2,45 @@
 % Please edit documentation in R/py.get.R
 \name{py.get}
 \alias{py.get}
-\title{Assign and get variables in Python from R}
+\title{Get values from Python variables to R}
 \usage{
 py.get(var.name, json.opt.ret = getOption("SnakeCharmR.json.opt.ret", list()))
 }
 \arguments{
-\item{var.name}{a character string containing a valid python variable name}
+\item{var.name}{a character string containing a valid Python variable name}
 
-\item{json.opt.ret}{explicit arguments to pass for JSON transformation}
+\item{json.opt.ret}{explicit arguments to pass to \code{jsonlite::fromJSON} 
+when deserializing the value}
 }
 \value{
-Function \code{py.get} returns a R version of the Python variable \code{py.var}.
+an R object containing the variable value after serialization to JSON
+in the Python environment and deserialization from JSON in the R environment
 }
 \description{
-Functions that assign and get Python variables from R.
-}
-\details{
-These functions can assign values to variables in Python as well as get
-their values back to R.  Objects are serialized as json strings while being
-transferred between R and Python.
+\code{py.get} get the value of Python and returns it to the R environment.
+Objects are serialized as JSON strings on Python with \code{json.dumps},
+are transferred to R and are converted back to an R value using
+\code{jsonlite::fromJSON}.
 }
 \examples{
-a <- 1:4
-py.assign( "a", a )
-py.exec( "b = len( a )" )
-py.get( "b" )
+py.assign("a", 1:4)
+py.get("a")
+# [1] 1 2 3 4
 
-py.exec( "import math" )
-py.get( "math.pi" )
+py.assign("b", list(one = 1, foo = "bar"))
+str(py.get("b"))
+# List of 2
+#  $ foo: chr "bar"
+#  $ one: int 1
+
+py.exec("import math")
+py.get("math.pi")
+# [1] 3.141593
+
+\dontrun{
+py.rm("notset")
+py.get("notset")
+# Error in py.get("notset") (from py.get.R#56) : NameError("name 'notset' is not defined",)
 }
-\references{
-\url{http://code.google.com/p/simplejson}
 }
-\keyword{manip}
 

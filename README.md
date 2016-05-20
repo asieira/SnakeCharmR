@@ -19,18 +19,18 @@ In systems where several Python versions coexist, the user can choose the Python
 
     $ python --version
 
-but it is possible to select a different one if the RPYTHON\_PYTHON\_VERSION environment variable is appropriately set.
+but it is possible to select a different one if the SNAKECHARMR\_PYTHON\_VERSION environment variable is appropriately set.
 
 For instance, if it is defined as
 
-    RPYTHON_PYTHON_VERSION=3.2
+    SNAKECHARMR_PYTHON_VERSION=3.2
 
 it will try to use Python 3.2 (looking for python3.2 and python3.2-config in the path). If set to
 
-    RPYTHON_PYTHON_VERSION=3
+    SNAKECHARMR_PYTHON_VERSION=3
 
 it will install against the "canonical" Python version in the system within the 3.x branch.
 
 ### WINDOWS SYSTEMS
 
-On a Windows system, the package can be installed from <https://github.com/cjgb/rPython-win>. It is the same source code and comes with specific platform instructions.
+There wasn't much testing done on Windows systems at this point, any help in testing and maintaining that would be much appreciated.

@@ -2,45 +2,55 @@
 % Please edit documentation in R/py.assign.R
 \name{py.assign}
 \alias{py.assign}
-\title{Assign and get variables in Python from R}
+\title{Assign values to Python variables from R}
 \usage{
 py.assign(var.name, value,
-  json.opt.args = getOption("SnakeCharmR.json.opt.args", list()))
+  json.opt.args = getOption("SnakeCharmR.json.opt.args", list(auto_unbox =
+  TRUE)))
 }
 \arguments{
-\item{var.name}{a character string containing a valid python variable name}
+\item{var.name}{a character string containing a valid Python variable name}
 
 \item{value}{an R object whose equivalent wants to be assigned to the
-variable in python}
+variable in Python}
 
-\item{json.opt.args}{explicit arguments to pass for JSON transformation}
-
-\item{...}{other arguments passed to the internal \code{toJSON} function
-call}
-}
-\value{
-Function \code{py.get} returns a R version of the Python
-variable \code{py.var}.
+\item{json.opt.args}{explicit arguments to pass to \code{jsonlite::toJSON} 
+when serializing the value}
 }
 \description{
-Functions that assign and get Python variables from R.
-}
-\details{
-These functions can assign values to variables in Python as well as get
-their values back to R.  Objects are serialized as json strings while being
-transferred between R and Python.
+\code{py.assign} assigns values to variables in Python.
+Objects are serialized as JSON strings on R with \code{jsonlite::toJSON},
+are transferred to Python and are converted back to a Python value using
+\code{json.loads}.
 }
 \examples{
-a <- 1:4
-py.assign( "a", a )
-py.exec( "b = len( a )" )
-py.get( "b" )
+py.assign("a", 1:4)
+py.get("a")
+# [1] 1 2 3 4
 
-py.exec( "import math" )
-py.get( "math.pi" )
+py.assign("b", list(one = 1, foo = "bar"))
+str(py.get("b"))
+# List of 2
+#  $ foo: chr "bar"
+#  $ one: int 1
+
+py.exec("import math")
+py.get("math.pi")
+# [1] 3.141593
+
+# by default jsonlite::toJSON is called on the value to be assigned
+# with auto_unbox = TRUE, so vectors of length 1 are simplified to
+# scalar values in Python
+py.assign("c", "foo bar")
+py.exec("crepr = repr(c)")
+py.get("crepr")
+# [1] "u'foo bar'"
+
+# if we explicitly set auto_unbox to FALSE, a vector of length 1
+# becomes a Python list of length 1
+py.assign("d", "foo bar", json.opt.args = list(auto_unbox = FALSE))
+py.exec("drepr = repr(d)")
+py.get("drepr")
+# [1] "[u'foo bar']"
 }
-\references{
-\url{http://code.google.com/p/simplejson}
-}
-\keyword{manip}
 

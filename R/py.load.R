@@ -1,29 +1,22 @@
-#' Executes Python code.
+#' Reads and executes Python code from a file
 #' 
-#' This function runs Python code contained in a file.  Typically, this file
-#' would contain functions to be called via \code{\link{py.call}} or other
-#' functions in this package.
+#' This function runs Python code contained in a file. This is basically
+#' a convenience function that is the equivalent of \code{py.exec(readLines(file))}.
 #' 
-#' The \code{get.exception} option allows the user to disregard Python
-#' exceptions in cases where safe calls to avoid the overhead of checking for
-#' them.
+#' For better maintainability, it might be worth investigating concentrating
+#' more complex Python code that needs to be called from R into proper packages
+#' that can be installed using \code{pip} and loaded with 
+#' \code{py.exec("import package_name")}.
 #' 
-#' @param file a file containing python code to be executed
-#' @param get.exception logical value indicating whether to check or not for
-#' exceptions in Python
-#' @return None.  If the code produces some output, it is up to the caller to
-#' go and fetch if from Python using function \code{\link{py.get}}.
-#' @keywords manip
+#' @param file a connection or file name that will be passed to \code{readLines} to
+#' read the Python code in the file
+#' @param stopOnException logical value indicating whether to check or not to
+#' call \code{stop} if a Python exception occurs
+#' @return if \code{stopOnException} is \code{FALSE}, invisibly returns a string
+#' representation of any raised Python exceptions or NULL if none occur.
 #' @export
-#' @examples
-#' a <- 1:4
-#' b <- 5:8
-#' 
-#' # this file contains the definition of function concat
-#' py.load( system.file( "concat.py", package = "rPython" ) )
-#' py.call( "concat", a, b)
-py.load <- function(file, get.exception = TRUE){
-  py.exec(readLines(file), stopOnException = get.exception)
+py.load <- function(file, stopOnException = TRUE){
+  py.exec(readLines(file), stopOnException = stopOnException)
 }
 
 
