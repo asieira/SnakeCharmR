@@ -23,19 +23,23 @@
 #' 
 #' \dontrun{
 #' py.exec("raise Exception('Stop the presses!')")
-#' # Error in py.exec("raise Exception('Stop the presses!')") (from py.exec.R#41) : 
-#' #   Exception('Stop the presses!',)
+#' # Error in py.exec("raise Exception('Stop the presses!')") (from py.exec.R#48) : 
+#' #   Traceback (most recent call last):
+#' #   File "<string>", line 2, in <module>
+#' # Exception: Stop the presses!
 #' }
 #' 
 #' py.exec("raise Exception('Houston, we have a problem!')", stopOnException = FALSE)
 #' # Warning message:
 #' # In py.exec("raise Exception('Houston, we have a problem!')", stopOnException = FALSE) :
-#' #   Exception('Houston, we have a problem!',)
+#' #   Traceback (most recent call last):
+#' #   File "<string>", line 2, in <module>
+#' # Exception: Houston, we have a problem!
 py.exec <- function(code, stopOnException = TRUE) {
   # execute code with exception handling
   rcpp_Py_run_code(
     sprintf(
-      "try:\n%s\nexcept BaseException as e:\n    _SnakeCharmR_exception = json.dumps(repr(e))",
+      "try:\n%s\nexcept:\n    _SnakeCharmR_exception = traceback.format_exc()",
       paste0("    ", unlist(sapply(code, stringr::str_split, "\n|\r\n"), use.names = F),
              collapse = "\n")
     )
@@ -45,7 +49,6 @@ py.exec <- function(code, stopOnException = TRUE) {
   exception = rcpp_Py_get_var("_SnakeCharmR_exception")
   if (!is.na(exception)) {
     py.rm("_SnakeCharmR_exception")
-    exception = .py.fromJSON(exception)
     if (stopOnException)
       stop(exception)
     else

@@ -40,7 +40,9 @@ py.get("math.pi")
 \dontrun{
 py.rm("notset")
 py.get("notset")
-# Error in py.get("notset") (from py.get.R#56) : NameError("name 'notset' is not defined",)
+# Error in py.get("notset") (from py.get.R#60) : Traceback (most recent call last):
+#   File "<string>", line 2, in <module>
+# NameError: name 'notset' is not defined
 }
 }
 

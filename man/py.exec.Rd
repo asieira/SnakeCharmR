@@ -32,14 +32,18 @@ py.call("concat", a, b)
 
 \dontrun{
 py.exec("raise Exception('Stop the presses!')")
-# Error in py.exec("raise Exception('Stop the presses!')") (from py.exec.R#41) : 
-#   Exception('Stop the presses!',)
+# Error in py.exec("raise Exception('Stop the presses!')") (from py.exec.R#48) : 
+#   Traceback (most recent call last):
+#   File "<string>", line 2, in <module>
+# Exception: Stop the presses!
 }
 
 py.exec("raise Exception('Houston, we have a problem!')", stopOnException = FALSE)
 # Warning message:
 # In py.exec("raise Exception('Houston, we have a problem!')", stopOnException = FALSE) :
-#   Exception('Houston, we have a problem!',)
+#   Traceback (most recent call last):
+#   File "<string>", line 2, in <module>
+# Exception: Houston, we have a problem!
 }
 \keyword{manip}
 

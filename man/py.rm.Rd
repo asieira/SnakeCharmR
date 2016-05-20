@@ -26,7 +26,9 @@ py.rm("a")
 \dontrun{
 py.rm("a")
 # Warning message:
-# In py.rm("a") : NameError("name 'a' is not defined",) 
+# In py.rm("a") : Traceback (most recent call last):
+#   File "<string>", line 2, in <module>
+# NameError: name 'a' is not defined
 }
 }
 

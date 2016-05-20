@@ -17,7 +17,9 @@
 #' \dontrun{
 #' py.rm("a")
 #' # Warning message:
-#' # In py.rm("a") : NameError("name 'a' is not defined",) 
+#' # In py.rm("a") : Traceback (most recent call last):
+#' #   File "<string>", line 2, in <module>
+#' # NameError: name 'a' is not defined
 #' }
 py.rm <- function(var.name, stopOnException = FALSE) {
   # parameter validation
@@ -25,17 +27,14 @@ py.rm <- function(var.name, stopOnException = FALSE) {
     stop("Bad or missing var.name parameter")
 
   rcpp_Py_run_code(
-    sprintf(
-      "try:\n    del %s\nexcept BaseException as e:\n    _SnakeCharmR_exception = json.dumps(repr(e))",
-      var.name
-    )
+    sprintf("try:\n    del %s\nexcept:\n    _SnakeCharmR_exception = traceback.format_exc()",
+            var.name)
   )
   
   # try to read the stored exception
   exception = rcpp_Py_get_var("_SnakeCharmR_exception")
   if (!is.na(exception)) {
     rcpp_Py_run_code("del _SnakeCharmR_exception")
-    exception = .py.fromJSON(exception)
     if (stopOnException)
       stop(exception)
     else
