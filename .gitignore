@@ -1,6 +1,5 @@
 autom4te.cache/*
 src/Makevars
-configure
 *.o
 *.so
 config.log
