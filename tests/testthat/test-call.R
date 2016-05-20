@@ -29,6 +29,10 @@ test_that("calling Python function works", {
             json.opt.ret = list(simplifyVector = FALSE)),
     list(1L, 2L, 3L)
   )
+  expect_equal(
+    py.call("repr", NULL),
+    "None"
+  )
 })
 
 test_that("exception handling on calling Python function works", {

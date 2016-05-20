@@ -42,7 +42,7 @@
 #' # [1] "[u'foo bar']"
 py.assign <- function(var.name, value,
                       json.opt.args = getOption("SnakeCharmR.json.opt.args", 
-                                                list(auto_unbox = TRUE))) {
+                                                list(auto_unbox = TRUE, null = "null"))) {
   # input validation
   if (missing(var.name) || !is.character(var.name) || is.na(var.name) || length(var.name) != 1)
     stop("Bad or missing var.name parameter")

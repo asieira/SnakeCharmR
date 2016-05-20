@@ -44,8 +44,10 @@
 #' py.call("repr", "foo bar", json.opt.args = list(auto_unbox = FALSE))
 #' # [1] "[u'foo bar']"
 py.call <- function(fname, ...,
-                    json.opt.args = getOption("SnakeCharmR.json.opt.args", list(auto_unbox = TRUE)),
-                    json.opt.ret = getOption("SnakeCharmR.json.opt.ret", list())) {
+                    json.opt.args = getOption("SnakeCharmR.json.opt.args", 
+                                              list(auto_unbox = TRUE, null = "null")),
+                    json.opt.ret = getOption("SnakeCharmR.json.opt.ret", 
+                                             list())) {
   if (missing(fname) || !is.character(fname) || is.na(fname) || length(fname) != 1)
     stop("Bad or missing fname parameter")
 
