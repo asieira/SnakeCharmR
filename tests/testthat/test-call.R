@@ -30,3 +30,15 @@ test_that("calling Python function works", {
     list(1L, 2L, 3L)
   )
 })
+
+test_that("exception handling on calling Python function works", {
+  py.exec(
+    paste0(
+      "def raise_func():",
+      "    raise Exception('oh noes')",
+      collapse = "\n"
+    )
+  )
+  
+  expect_error(py.call("raise_func"), "oh noes")
+})

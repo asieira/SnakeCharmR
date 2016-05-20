@@ -10,13 +10,8 @@ py.exec(code, stopOnException = TRUE)
 \item{code}{a character vector containing Python code, typically a
 single line with indentation and EOL characters as required by Python syntax}
 
-\item{stopOnException}{logical value indicating whether or not to call \code{stop}
-if a Python exception occurs}
-}
-\value{
-if \code{stopOnException} is \code{FALSE}, returns a character vector of
-length 1 with a representation of any raised Python exceptions. Otherwise, returns 
-NULL invisibly.
+\item{stopOnException}{if \code{TRUE} then \code{stop} will be called if a 
+Python exception occurs, otherwise only a warning will be flagged}
 }
 \description{
 This function runs Python code that is provided in a character vector.
@@ -42,10 +37,9 @@ py.exec("raise Exception('Stop the presses!')")
 }
 
 py.exec("raise Exception('Houston, we have a problem!')", stopOnException = FALSE)
-# [1] "Exception('Houston, we have a problem!',)"
-
-str(py.exec("a = 'nothing to see here'"))
-#  NULL
+# Warning message:
+# In py.exec("raise Exception('Houston, we have a problem!')", stopOnException = FALSE) :
+#   Exception('Houston, we have a problem!',)
 }
 \keyword{manip}
 

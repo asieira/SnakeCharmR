@@ -4,10 +4,14 @@
 \alias{py.rm}
 \title{Remove a Python variable from R}
 \usage{
-py.rm(var.name)
+py.rm(var.name, stopOnException = FALSE)
 }
 \arguments{
 \item{var.name}{a character string containing a valid Python variable name}
+
+\item{stopOnException}{if \code{TRUE} then \code{stop} will be called if a 
+Python exception occurs, typically because the variable doesn't exist, 
+otherwise only a warning will be flagged}
 }
 \description{
 This function uses the \code{del} Python command to remove a variable and reclaim
@@ -18,10 +22,11 @@ not exist, will be caught and ignored.
 py.assign("a", "foo bar")
 py.get("a")
 # [1] "foo bar"
+py.rm("a")
 \dontrun{
 py.rm("a")
-py.get("a")
-# Error in py.get("a") (from py.get.R#56) : NameError("name 'a' is not defined",)
+# Warning message:
+# In py.rm("a") : NameError("name 'a' is not defined",) 
 }
 }
 
