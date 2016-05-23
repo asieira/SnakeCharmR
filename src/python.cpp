@@ -9,12 +9,10 @@ using namespace Rcpp;
 #include <dlfcn.h>
 #endif
 
-#define xstr(a) #a
-
 // [[Rcpp::export]]
 void rcpp_Py_Initialize() {
 #ifndef _WIN32
-  dlopen( xstr(PYTHONLIBFILE), RTLD_NOW | RTLD_GLOBAL );		// Passed as a macro at compile time
+  dlopen( PYTHONLIBFILE, RTLD_NOW | RTLD_GLOBAL );		// Passed as a macro at compile time
 #endif
 
   Py_Initialize();
