@@ -2,6 +2,9 @@ language: r
 warnings_are_errors: true
 sudo: required
 
+r_packages:
+  - covr
+
 os:
   - linux
   - osx
@@ -18,3 +21,6 @@ notifications:
   email:
     on_success: change
     on_failure: change
+
+after_success:
+  - Rscript -e 'library("covr");codecov()'
