@@ -27,19 +27,25 @@ void rcpp_Py_Finalize() {
 
 // [[Rcpp::export]]
 int rcpp_Py_run_code(String code) {
+  if (code.get_encoding() != "UTF-8")
+    code.set_encoding("UTF-8");
+  code.push_front("# -*- coding: utf-8 -*-\n");
   return PyRun_SimpleString(code.get_cstring());
 }
 
 // [[Rcpp::export]]
 String rcpp_Py_get_var(String varname) {
-  PyObject *result = PyDict_GetItemString(PyModule_GetDict(PyImport_AddModule("__main__")),
-                                          varname.get_cstring());
-  if (result == NULL)
+  PyObject *value = PyDict_GetItemString(PyModule_GetDict(PyImport_AddModule("__main__")),
+                                         varname.get_cstring());
+  if (value == NULL)
     return NA_STRING;
 
-#if PY_MAJOR_VERSION >= 3
-  return String(PyBytes_AS_STRING(PyUnicode_AsUTF8String(result)));
-#else
-  return String(PyString_AS_STRING(result));
-#endif
+  if (PyUnicode_Check(value)) {
+    String retval(PyString_AS_STRING(PyUnicode_AsUTF8String(value)));
+    retval.set_encoding("UTF-8");
+    return retval;
+  } else if (PyString_Check(value))
+    return String(PyString_AS_STRING(value));
+  else
+    throw std::invalid_argument("variable is not a string");
 }
