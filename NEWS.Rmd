@@ -10,6 +10,11 @@ knitr::opts_chunk$set(
   fig.retina = 2
 )
 ```
+# SnakeCharmR 1.0.4
+
+Fixes https://github.com/asieira/SnakeCharmR/issues/24. Thanks for David Severski (@dseverski)
+for reporting this.
+
 # SnakeCharmR 1.0.3
 
 Taking measures to ensure SnakeCharmR will work properly on systems where the native encoding is not UTF-8:
