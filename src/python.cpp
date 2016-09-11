@@ -31,8 +31,8 @@ int rcpp_Py_run_code(String code) {
   if (code.get_encoding() != CE_UTF8)
     code.set_encoding(CE_UTF8);
 #else
-  if (code.get_encding() != "UTF-8")
-    code.set_conding("UTF-8");
+  if (code.get_encoding() != "UTF-8")
+    code.set_encoding("UTF-8");
 #endif
   code.push_front("# -*- coding: utf-8 -*-\n");
   return PyRun_SimpleString(code.get_cstring());
