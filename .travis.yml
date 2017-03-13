@@ -15,9 +15,7 @@ os:
   - linux
   - osx
 
-before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install python python3; fi
+brew_packages: python python3
 
 addons:
   apt:
