@@ -47,14 +47,14 @@ String rcpp_Py_get_var(String varname) {
 
   if (PyUnicode_Check(value)) {
 #if RCPP_VERSION > Rcpp_Version(0,12,6)
-    String retval(PyString_AS_STRING(PyUnicode_AsUTF8String(value)), CE_UTF8);
+    String retval(PyBytes_AS_STRING(PyUnicode_AsUTF8String(value)), CE_UTF8);
 #else
-    String retval(PyString_AS_STRING(PyUnicode_AsUTF8String(value)));
+    String retval(PyBytes_AS_STRING(PyUnicode_AsUTF8String(value)));
     retval.set_encoding("UTF-8");
 #endif
     return retval;
-  } else if (PyString_Check(value))
-    return String(PyString_AS_STRING(value));
+  } else if (PyBytes_Check(value))
+    return String(PyBytes_AS_STRING(value));
   else
     throw std::invalid_argument("variable is not a string");
 }

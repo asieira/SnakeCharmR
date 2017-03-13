@@ -1,3 +1,10 @@
+SnakeCharmR 1.0.6
+=================
+Fixed compilation on Python 3, fixing https://github.com/asieira/SnakeCharmR/issues/33. Thanks to https://github.com/lfdmotta for reporting this.
+
+Updated Travis tests to cover Python 2 and 3, and also to cover all major versions of R.
+
+
 SnakeCharmR 1.0.5
 =================
 Cleaned up configure.ac and src/Makevars.in to remove unnecessary steps inherited from RPython code.
