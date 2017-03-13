@@ -46,4 +46,3 @@ py.exec("raise Exception('Houston, we have a problem!')", stopOnException = FALS
 # Exception: Houston, we have a problem!
 }
 \keyword{manip}
-

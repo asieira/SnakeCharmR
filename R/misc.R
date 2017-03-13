@@ -1,7 +1,7 @@
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage(
-    c("SnakeCharmR v1.0.4 - R and Python Integration\n",
-      "Contribute and submit issues at https://github.com/asieira/SnakeCharmR")
+    sprintf("SnakeCharmR %s - R and Python Integration\n", utils::packageVersion("SnakeCharmR")),
+    "Contribute and submit issues at https://github.com/asieira/SnakeCharmR"
   )
 }
 

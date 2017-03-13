@@ -1,6 +1,10 @@
-SnakeCharmR 1.0.5 (unreleased)
+SnakeCharmR 1.0.5
 =================
 Cleaned up configure.ac and src/Makevars.in to remove unnecessary steps inherited from RPython code.
+
+Fixed issue with logo image in README file in CRAN page.
+
+Updated versions of package dependencies.
 
 
 SnakeCharmR 1.0.4
