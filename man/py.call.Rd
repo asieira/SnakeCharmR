@@ -59,4 +59,3 @@ py.call("repr", "foo bar")
 py.call("repr", "foo bar", json.opt.args = list(auto_unbox = FALSE))
 # [1] "[u'foo bar']"
 }
-

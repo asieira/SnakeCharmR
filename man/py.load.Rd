@@ -27,4 +27,3 @@ more complex Python code that needs to be called from R into proper packages
 that can be installed using \code{pip} and loaded with 
 \code{py.exec("import package_name")}.
 }
-

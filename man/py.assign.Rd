@@ -53,4 +53,3 @@ py.exec("drepr = repr(d)")
 py.get("drepr")
 # [1] "[u'foo bar']"
 }
-
