@@ -15,7 +15,7 @@ os:
   - linux
   - osx
 
-brew_packages: python python3
+brew_packages: python3
 
 addons:
   apt:
