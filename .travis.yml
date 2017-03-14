@@ -1,5 +1,7 @@
 language: r
-warnings_are_errors: true
+
+cache: packages
+
 sudo: required
 
 r_packages:
@@ -9,13 +11,19 @@ os:
   - linux
   - osx
 
-apt_packages:
- - python-dev
- - python
+brew_packages: python3
+
+addons:
+  apt:
+    packages:
+      - python-dev
+      - python
+      - python3-dev
+      - python3
 
 env:
- global:
-   - CRAN: http://cran.rstudio.com
+  - SNAKECHARMR_PYTHON_VERSION=2
+  - SNAKECHARMR_PYTHON_VERSION=3
 
 notifications:
   email:
