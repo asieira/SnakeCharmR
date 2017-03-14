@@ -9,6 +9,12 @@ using namespace Rcpp;
 #include <dlfcn.h>
 #endif
 
+// fix R check warning as per https://github.com/RcppCore/Rcpp/issues/636#issuecomment-280985661
+void R_init_SnakeCharmR(DllInfo* info) {
+  R_registerRoutines(info, NULL, NULL, NULL, NULL);
+  R_useDynamicSymbols(info, TRUE);
+}
+
 // [[Rcpp::export]]
 void rcpp_Py_Initialize() {
 #ifndef _WIN32

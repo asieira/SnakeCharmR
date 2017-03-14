@@ -3,7 +3,7 @@
 #' @description A fork from rPython which uses jsonlite and has several fixes and improvements
 #' @name SnakeCharmR
 #' @docType package
-#' @useDynLib SnakeCharmR
+#' @useDynLib SnakeCharmR, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom stringr str_replace_all regex str_split
