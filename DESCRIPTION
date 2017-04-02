@@ -1,6 +1,6 @@
 Package: SnakeCharmR
-Version: 1.0.6
-Date: 2017-03-14
+Version: 1.0.7
+Date: 2017-04-02
 Title: R and Python Integration
 Author: Alexandre Sieira, forked off of rPython by Carlos J. Gil Bellosta
 Maintainer: Alexandre Sieira <alexandre.sieira@gmail.com>
@@ -14,7 +14,6 @@ Imports:
 License: GPL-2
 SystemRequirements: Python (>= 2.7) and Python headers and libraries
     (See the INSTALL file)
-OS_type: unix
 URL: https://github.com/asieira/SnakeCharmR
 BugReports: https://github.com/asieira/SnakeCharmR/issues
 Suggests:

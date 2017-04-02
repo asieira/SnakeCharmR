@@ -1,19 +1,17 @@
 # Process this file with autoconf to produce a configure script.
 # This file is based on configure.ac file distributed along with the rJava package
 
-AC_INIT(SnakeCharmR, 1.0.6, alexandre.sieira@gmail.com)
+AC_INIT(SnakeCharmR, 1.0.7, alexandre.sieira@gmail.com)
 AC_CONFIG_SRCDIR([src])
 
 # find user defined python version, if set
 if test -z "${SNAKECHARMR_PYTHON_VERSION}"
 then
-  echo "A specific python version to use was not provided, defaulting to the standard Python in the system."
-  MYPYTHONCONFIG=python-config
-  MYPYTHON=python
-else
-  MYPYTHON=python${SNAKECHARMR_PYTHON_VERSION}
-  MYPYTHONCONFIG=python${SNAKECHARMR_PYTHON_VERSION}-config
+  SNAKECHARMR_PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
+  echo Auto-determined SNAKECHARMR_PYTHON_VERSION=${SNAKECHARMR_PYTHON_VERSION}
 fi
+MYPYTHON=python${SNAKECHARMR_PYTHON_VERSION}
+MYPYTHONCONFIG=python${SNAKECHARMR_PYTHON_VERSION}-config
 
 # Extract the linker and include flags for python
 : ${PYTHONCONFIG=`which ${MYPYTHONCONFIG}`}
@@ -32,7 +30,7 @@ if test -z "${PYTHON}"; then
   exit 1
 fi
 
-PYTHONLIBFILE=libpython`$PYTHON -c "import sys; print(sys.version[[:3]])"`.so
+PYTHONLIBFILE=libpython${SNAKECHARMR_PYTHON_VERSION}.so
 PKG_CPPFLAGS="$PKG_CPPFLAGS -D PYTHONLIBFILE=\\\"$PYTHONLIBFILE\\\""
 
 AC_SUBST(PKG_LIBS)

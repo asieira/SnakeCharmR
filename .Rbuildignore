@@ -5,3 +5,4 @@
 ^autom4te\.cache$
 ^snaker\.jpg$
 ^\.travis\.yml$
+^appveyor\.yml$

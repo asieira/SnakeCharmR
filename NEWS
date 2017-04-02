@@ -1,3 +1,12 @@
+SnakeCharmR 1.0.7
+=================
+Should now compile on Windows using the Rtools Python libraries or the standard Python
+package. Many thanks to Matthew Fidler (https://github.com/mattfidler), his help was invaluable
+in helping implement and test this.
+
+Added Appveyor tests for the Windows build.
+
+
 SnakeCharmR 1.0.6
 =================
 Fixed compilation on Python 3, fixing https://github.com/asieira/SnakeCharmR/issues/33. Thanks to https://github.com/lfdmotta for reporting this.
