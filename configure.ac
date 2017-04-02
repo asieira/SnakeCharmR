@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 # This file is based on configure.ac file distributed along with the rJava package
 
-AC_INIT(SnakeCharmR, 1.0.6, alexandre.sieira@gmail.com)
+AC_INIT(SnakeCharmR, 1.0.7, alexandre.sieira@gmail.com)
 AC_CONFIG_SRCDIR([src])
 
 # find user defined python version, if set
