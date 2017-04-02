@@ -43,18 +43,10 @@ artifacts:
 
 environment:
   matrix:
-    - PYTHON: "C:\\Python27_32"
-      PYTHON_VERSION: "2.7"
-      PYTHON_ARCH: "32"
-  
-    - PYTHON: "C:\\Python27_64"
-      PYTHON_VERSION: "2.7"
-      PYTHON_ARCH: "64"
-  
-    - PYTHON: "C:\\Python36_32"
-      PYTHON_VERSION: "3.6"
-      PYTHON_ARCH: "32"
-  
-    - PYTHON: "C:\\Python36_64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_ARCH: "64"
+    - PATH: C:\Python27;%PATH%
+    
+    - PATH: C:\Python27-x64;%PATH%
+    
+    - PATH: C:\Python36;%PATH%
+    
+    - PATH: C:\Python36-x64;%PATH%
