@@ -42,6 +42,8 @@ artifacts:
     name: Bits
 
 environment:
+  USE_RTOOLS: true
+  
   matrix:
     - PATH: C:\Python27;%PATH%
       R_ARCH: i386
@@ -68,3 +70,5 @@ environment:
       R_ARCH: x64
       GCC_PATH: mingw_64
       PYTHONHOME: c:\Rtools\mingw_32\opt
+
+platform: x64
