@@ -3,6 +3,7 @@
 rm src/*.o
 rm src/*.so
 rm src/Makevars
+rm src/Makevars.win
 rm config.log
 rm config.status
 rm configure

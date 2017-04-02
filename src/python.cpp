@@ -5,7 +5,7 @@ using namespace Rcpp;
 #include <string.h>
 #include <bytesobject.h>
 
-#ifndef _WIN32
+#if !defined(_WIN32) && !defined(WIN32)
 #include <dlfcn.h>
 #endif
 
@@ -17,10 +17,10 @@ void R_init_SnakeCharmR(DllInfo* info) {
 
 // [[Rcpp::export]]
 void rcpp_Py_Initialize() {
-#ifndef _WIN32
+#if !defined(_WIN32) && !defined(WIN32)
   dlopen( PYTHONLIBFILE, RTLD_NOW | RTLD_GLOBAL );		// Passed as a macro at compile time
 #endif
-
+  
   Py_Initialize();
   PyRun_SimpleString("import json");
   PyRun_SimpleString("import traceback");

@@ -1,7 +1,9 @@
 autom4te.cache/*
 src/Makevars
+src/Makevars.win
 *.o
 *.so
+*.dll
 config.log
 config.status
 .Rproj.user
