@@ -40,3 +40,20 @@ artifacts:
 
   - path: '\*_*.zip'
     name: Bits
+
+matrix:
+  - PYTHON: "C:\\Python27_32"
+    PYTHON_VERSION: "2.7"
+    PYTHON_ARCH: "32"
+
+  - PYTHON: "C:\\Python27_64"
+    PYTHON_VERSION: "2.7"
+    PYTHON_ARCH: "64"
+
+  - PYTHON: "C:\\Python36_32"
+    PYTHON_VERSION: "3.6"
+    PYTHON_ARCH: "32"
+
+  - PYTHON: "C:\\Python36_64"
+    PYTHON_VERSION: "3.6"
+    PYTHON_ARCH: "64"
