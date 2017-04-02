@@ -23,18 +23,28 @@ fi
 
 # Set include and library folders according to whether we're using Rtools / mingw
 # or offical Python packages.
-if [ -d "${EXEC_PREFIX}/lib/python${SNAKECHARMR_PYTHON_VERSION}/config" ]; then
-  LIBDIR=${EXEC_PREFIX}/lib/python${SNAKECHARMR_PYTHON_VERSION}/config
-else
+if [ -d "${EXEC_PREFIX}/libs" ]; then
+  # using standard Python
   LIBDIR=${EXEC_PREFIX}/libs
-fi
-
-if [ -d "${EXEC_PREFIX}/include/python${SNAKECHARMR_PYTHON_VERSION}" ]; then
-  INCDIR=${EXEC_PREFIX}/include/python${SNAKECHARMR_PYTHON_VERSION}
+  LIBNAME=python`${PYTHON_INTERPRETER} -c "print('${SNAKECHARMR_PYTHON_VERSION}'.replace('.', ''))"`
 else
-  INCDIR=${EXEC_PREFIX}/include
+  # using standard Python *nix convention (works with Rtools mingw Python)
+  LIBDIR=${EXEC_PREFIX}/lib/python${SNAKECHARMR_PYTHON_VERSION}/config
+  LIBNAME=python${SNAKECHARMR_PYTHON_VERSION}
 fi
+echo Detected library dir ${LIBDIR}
+echo Detected library name ${LIBNAME}
 
-echo "PKG_LIBS=-L'${LIBDIR}' -lpython${SNAKECHARMR_PYTHON_VERSION}" > src/Makevars.win
+if [ ! -d "${EXEC_PREFIX}/include/python${SNAKECHARMR_PYTHON_VERSION}" ]; then
+  # using standard Python
+  INCDIR=${EXEC_PREFIX}/include
+else
+  # using standard Python *nix convention (works with Rtools mingw Python)
+  INCDIR=${EXEC_PREFIX}/include/python${SNAKECHARMR_PYTHON_VERSION}
+fi
+echo Detected include dir ${INCDIR}
+
+# Create Makevars.win
+echo "PKG_LIBS=-L'${LIBDIR}' -l${LIBNAME}" > src/Makevars.win
 echo "PKG_CPPFLAGS=-I'${INCDIR}'" >> src/Makevars.win
 echo "CXX_STD=CXX11" >> src/Makevars.win
