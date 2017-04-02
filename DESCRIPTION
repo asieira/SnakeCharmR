@@ -1,6 +1,6 @@
 Package: SnakeCharmR
-Version: 1.0.6
-Date: 2017-03-14
+Version: 1.0.7
+Date: 2017-04-02
 Title: R and Python Integration
 Author: Alexandre Sieira, forked off of rPython by Carlos J. Gil Bellosta
 Maintainer: Alexandre Sieira <alexandre.sieira@gmail.com>
