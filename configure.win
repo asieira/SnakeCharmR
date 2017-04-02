@@ -4,13 +4,15 @@
 # interpreter in PATH and obtain its version
 if [ -z "$SNAKECHARMR_PYTHON_VERSION" ]; then
   SNAKECHARMR_PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
-  echo Auto-determined SNAKECHARMR_PYTHON_VERSION=${SNAKECHARMR_PYTHON_VERSION}
+  echo Auto-determined Python version ${SNAKECHARMR_PYTHON_VERSION}
+  PYTHON_INTERPRETER=python
 else
   echo Using SNAKECHARMR_PYTHON_VERSION=${SNAKECHARMR_PYTHON_VERSION}
+  PYTHON_INTERPRETER=python${SNAKECHARMR_PYTHON_VERSION}
 fi 
 
 # Get exec-prefix from Python interpreter and find the lib locations from there
-EXEC_PREFIX=`"python${SNAKECHARMR_PYTHON_VERSION}" -c "import sys; print(sys.exec_prefix)"`
+EXEC_PREFIX=`${PYTHON_INTERPRETER} -c "import sys; print(sys.exec_prefix)"`
 echo Detected EXEC_PREFIX=${EXEC_PREFIX}
 
 if [ -z "$PYTHONHOME" ]; then
