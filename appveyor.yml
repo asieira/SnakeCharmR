@@ -44,9 +44,13 @@ artifacts:
 environment:
   matrix:
     - PATH: C:\Python27;%PATH%
+      R_ARCH: i386
     
     - PATH: C:\Python27-x64;%PATH%
+      R_ARCH: x64
     
     - PATH: C:\Python36;%PATH%
+      R_ARCH: i386
     
     - PATH: C:\Python36-x64;%PATH%
+      R_ARCH: x64
