@@ -15,13 +15,26 @@ fi
 EXEC_PREFIX=`${PYTHON_INTERPRETER} -c "import sys; print(sys.exec_prefix)"`
 echo Detected EXEC_PREFIX=${EXEC_PREFIX}
 
+# Warn about the lack of PYTHONHOME
 if [ -z "$PYTHONHOME" ]; then
   echo PYTHONHOME is not defined, this might cause an error when loading the package.
   echo Please try setting it to "${EXEC_PREFIX}" on a system level if you have issues.
 fi
 
-LIBDIR=${EXEC_PREFIX}/lib/python${SNAKECHARMR_PYTHON_VERSION}/config
-INCDIR=${EXEC_PREFIX}/include/python${SNAKECHARMR_PYTHON_VERSION}
+# Set include and library folders according to whether we're using Rtools / mingw
+# or offical Python packages.
+if [ -d "${EXEC_PREFIX}/lib/python${SNAKECHARMR_PYTHON_VERSION}/config" ]; then
+  LIBDIR=${EXEC_PREFIX}/lib/python${SNAKECHARMR_PYTHON_VERSION}/config
+else
+  LIBDIR=${EXEC_PREFIX}/libs
+fi
+
+if [ -d "${EXEC_PREFIX}/include/python${SNAKECHARMR_PYTHON_VERSION}" ]; then
+  INCDIR=${EXEC_PREFIX}/include/python${SNAKECHARMR_PYTHON_VERSION}
+else
+  INCDIR=${EXEC_PREFIX}/include
+fi
+
 echo "PKG_LIBS=-L'${LIBDIR}' -lpython${SNAKECHARMR_PYTHON_VERSION}" > src/Makevars.win
 echo "PKG_CPPFLAGS=-I'${INCDIR}'" >> src/Makevars.win
 echo "CXX_STD=CXX11" >> src/Makevars.win
