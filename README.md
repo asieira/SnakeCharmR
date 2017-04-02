@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/asieira/SnakeCharmR.svg?branch=master)](https://travis-ci.org/asieira/SnakeCharmR) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/asieira/SnakeCharmR?branch=master&svg=true)](https://ci.appveyor.com/project/asieira/SnakeCharmR) [![codecov](https://codecov.io/gh/asieira/SnakeCharmR/branch/master/graph/badge.svg)](https://codecov.io/gh/asieira/SnakeCharmR) [![](http://cranlogs.r-pkg.org/badges/grand-total/SnakeCharmR)](http://cran.rstudio.com/web/packages/SnakeCharmR/index.html)
+[![Travis-CI Build Status](https://travis-ci.org/asieira/SnakeCharmR.svg?branch=master)](https://travis-ci.org/asieira/SnakeCharmR) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/asieira/SnakeCharmR?branch=master&svg=true)](https://ci.appveyor.com/project/asieira/SnakeCharmR) [![codecov](https://codecov.io/gh/asieira/SnakeCharmR/branch/master/graph/badge.svg)](https://codecov.io/gh/asieira/SnakeCharmR) [![](https://cranlogs.r-pkg.org/badges/grand-total/SnakeCharmR)](https://cran.rstudio.com/web/packages/SnakeCharmR/index.html)
 
 <img src="tools/snaker.jpg" width="33%"/>
 
