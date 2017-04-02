@@ -47,7 +47,7 @@ echo Detected include dir ${INCDIR}
 # Create Makevars.win
 echo "PKG_LIBS=-L'${LIBDIR}' -l${LIBNAME}" > src/Makevars.win
 echo "PKG_CPPFLAGS=-I'${INCDIR}'" >> src/Makevars.win
-#echo "CXX_STD=CXX11" >> src/Makevars.win
+echo "CXX_STD=CXX11" >> src/Makevars.win
 
 echo --------[[begin src/Makevars.win]]--------
 cat src/Makevars.win
