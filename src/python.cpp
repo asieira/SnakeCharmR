@@ -24,6 +24,7 @@ void rcpp_Py_Initialize() {
   Py_Initialize();
   PyRun_SimpleString("import json");
   PyRun_SimpleString("import traceback");
+  PyRun_SimpleString("import sys");
 }
 
 // [[Rcpp::export]]

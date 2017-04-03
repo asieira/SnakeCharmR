@@ -2,7 +2,13 @@
   packageStartupMessage(
     sprintf("SnakeCharmR %s - R and Python Integration\n", utils::packageVersion("SnakeCharmR")),
     "Contribute and submit issues at https://github.com/asieira/SnakeCharmR\n",
-    paste("\nPython version", {py.exec("import sys"); py.get("sys.version")})
+    paste("\nPython version", 
+          {
+            x = paste0(py.get("sys.version"), collapse = "\n");
+            if (!is.character(x) || length(x) != 1 || is.na(x)) 
+              stop(utils::capture.output(str(x)));
+            x
+          })
   )
 }
 
