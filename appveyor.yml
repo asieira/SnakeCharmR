@@ -69,6 +69,6 @@ environment:
     - PATH: C:\Rtools\mingw_64\opt\bin;%PATH%
       R_ARCH: x64
       GCC_PATH: mingw_64
-      PYTHONHOME: c:\Rtools\mingw_32\opt
+      PYTHONHOME: c:\Rtools\mingw_64\opt
 
 platform: x64

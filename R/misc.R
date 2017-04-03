@@ -2,14 +2,16 @@
   packageStartupMessage(
     sprintf("%s %s - R and Python Integration\n", pkgname, utils::packageVersion(pkgname)),
     "Contribute and submit issues at https://github.com/asieira/SnakeCharmR\n",
-    paste("\nPython version", 
-          {
-            x = paste0(py.get("sys.version"), collapse = "\n");
-            if (!is.character(x) || length(x) != 1 || is.na(x)) 
-              x = paste0(sapply(0:2, function(x) py.get(sprintf("sys.version_info[%i]", x))),
-                         collapse = ".");
-            x
-          })
+    paste(
+      "\nPython version", 
+      {
+        x = paste0(py.get("sys.version"), collapse = "\n");
+        if (!is.character(x) || length(x) != 1 || is.na(x)) 
+          x = paste0(sapply(0:2, function(x) py.get(sprintf("sys.version_info[%i]", x))),
+                     collapse = ".");
+        x
+      }
+    )
   )
 }
 
