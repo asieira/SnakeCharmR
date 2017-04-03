@@ -1,16 +1,13 @@
-python_version = NULL
-
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage(
     sprintf("SnakeCharmR %s - R and Python Integration\n", utils::packageVersion("SnakeCharmR")),
     "Contribute and submit issues at https://github.com/asieira/SnakeCharmR\n",
-    paste("\nPython version", if (is.character(python_version)) python_version else "unknown")
+    paste("\nPython version", {py.exec("import sys"); py.get("sys.version")})
   )
 }
 
 .onLoad <- function(libname, pkgname) {
   rcpp_Py_Initialize()
-  python_version <<- try(py.get("sys.version"))
 }
 
 .onUnload <- function(libpath) {
