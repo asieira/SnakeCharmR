@@ -48,11 +48,13 @@ environment:
     - PATH: C:\Python27;%PATH%
       R_ARCH: i386
       GCC_PATH: mingw_32
-    
-    - PATH: C:\Python27-x64;%PATH%
-      R_ARCH: x64
-      GCC_PATH: mingw_64
-      PYTHONHOME: c:\Python27-x64
+
+# Not sure why this is not working, need to investigate more later. :(
+#
+#    - PATH: C:\Python27-x64;%PATH%
+#      R_ARCH: x64
+#      GCC_PATH: mingw_64
+#      PYTHONHOME: c:\Python27-x64
 
     - PATH: C:\Python36;%PATH%
       R_ARCH: i386
