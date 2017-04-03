@@ -1,14 +1,14 @@
 #!/bin/sh
 
+# Check if Python interpreter exists
+PYTHON_INTERPRETER=python${SNAKECHARMR_PYTHON_VERSION}
+command -v ${PYTHON_INTERPRETER} >/dev/null 2>&1 || { echo "Cannot find command '${PYTHON_INTERPRETER}'. Aborting."; exit 1; }
+
 # If SNAKECHARMR_PYTHON_VERSION was not provided, assume there's a python
 # interpreter in PATH and obtain its version
 if [ -z "$SNAKECHARMR_PYTHON_VERSION" ]; then
-  SNAKECHARMR_PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
-  echo Auto-determined Python version ${SNAKECHARMR_PYTHON_VERSION}
-  PYTHON_INTERPRETER=python
-else
-  echo Using SNAKECHARMR_PYTHON_VERSION=${SNAKECHARMR_PYTHON_VERSION}
-  PYTHON_INTERPRETER=python${SNAKECHARMR_PYTHON_VERSION}
+  SNAKECHARMR_PYTHON_VERSION=`${PYTHON_INTERPRETER} -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
+  echo Found Python version ${SNAKECHARMR_PYTHON_VERSION}
 fi 
 
 # Get exec-prefix from Python interpreter and find the lib locations from there

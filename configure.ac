@@ -4,37 +4,28 @@
 AC_INIT(SnakeCharmR, 1.0.7, alexandre.sieira@gmail.com)
 AC_CONFIG_SRCDIR([src])
 
+PYTHON_CONFIG=python${SNAKECHARMR_PYTHON_VERSION}-config
+command -v ${PYTHON_CONFIG} >/dev/null 2>&1 || { echo "Cannot find command '${PYTHON_CONFIG}'. Aborting."; exit 1; }
+echo Using ${PYTHON_CONFIG}...
+
 # find user defined python version, if set
-if test -z "${SNAKECHARMR_PYTHON_VERSION}"
-then
-  SNAKECHARMR_PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
-  echo Auto-determined SNAKECHARMR_PYTHON_VERSION=${SNAKECHARMR_PYTHON_VERSION}
-fi
-MYPYTHON=python${SNAKECHARMR_PYTHON_VERSION}
-MYPYTHONCONFIG=python${SNAKECHARMR_PYTHON_VERSION}-config
-
-# Extract the linker and include flags for python
-: ${PYTHONCONFIG=`which ${MYPYTHONCONFIG}`}
-if test -z "${PYTHONCONFIG}"; then
-  echo "Unable to locate ${MYPYTHONCONFIG} - please ensure SNAKECHARMR_PYTHON_VERSION environment variable is set correctly."
-  exit 1
+if test -z "${SNAKECHARMR_PYTHON_VERSION}"; then
+  PYTHON_INTERPRETER=python${SNAKECHARMR_PYTHON_VERSION}
+  command -v ${PYTHON_INTERPRETER} >/dev/null 2>&1 || { echo "Cannot find command '${PYTHON_INTERPRETER}'. Aborting."; exit 1; }
+  SNAKECHARMR_PYTHON_VERSION=`${PYTHON_INTERPRETER} -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
+  echo Found Python version ${SNAKECHARMR_PYTHON_VERSION} with command ${PYTHON_INTERPRETER}...
 fi
 
-PKG_LIBS=`$PYTHONCONFIG --ldflags`
-PKG_CPPFLAGS=`$PYTHONCONFIG --includes`
-
-# Find the .so library for python
-: ${PYTHON=`which ${MYPYTHON}`}
-if test -z "${PYTHON}"; then
-  echo "could not locate ${MYPYTHON}"
-  exit 1
-fi
-
-PYTHONLIBFILE=libpython${SNAKECHARMR_PYTHON_VERSION}.so
-PKG_CPPFLAGS="$PKG_CPPFLAGS -D PYTHONLIBFILE=\\\"$PYTHONLIBFILE\\\""
+PKG_LIBS=`$PYTHON_CONFIG --ldflags`
+PKG_CPPFLAGS=`$PYTHON_CONFIG --includes`
+PKG_CPPFLAGS+=" -D PYTHONLIBFILE=\\\"libpython${SNAKECHARMR_PYTHON_VERSION}.so\\\""
 
 AC_SUBST(PKG_LIBS)
 AC_SUBST(PKG_CPPFLAGS)
 
 AC_CONFIG_FILES([src/Makevars])
 AC_OUTPUT
+
+echo --------[[begin src/Makevars]]--------
+cat src/Makevars
+echo --------[[end src/Makevars]]--------
