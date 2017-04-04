@@ -10,10 +10,9 @@ echo Using ${PYTHON_CONFIG}...
 
 # find user defined python version, if set
 if test -z "${SNAKECHARMR_PYTHON_VERSION}"; then
-  PYTHON_INTERPRETER=python${SNAKECHARMR_PYTHON_VERSION}
-  command -v ${PYTHON_INTERPRETER} >/dev/null 2>&1 || { echo "Cannot find command '${PYTHON_INTERPRETER}'. Aborting."; exit 1; }
-  SNAKECHARMR_PYTHON_VERSION=`${PYTHON_INTERPRETER} -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
-  echo Found Python version ${SNAKECHARMR_PYTHON_VERSION} with command ${PYTHON_INTERPRETER}...
+  command -v python >/dev/null 2>&1 || { echo "Cannot find command '${PYTHON_INTERPRETER}'. Aborting."; exit 1; }
+  SNAKECHARMR_PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
+  echo Found Python version ${SNAKECHARMR_PYTHON_VERSION}...
 fi
 
 PKG_LIBS=`$PYTHON_CONFIG --ldflags`
