@@ -38,5 +38,7 @@
 }
 
 .py.fromJSON <- function(x, json.options = list()) {
+  if (is.raw(x))
+    x <- rawConnection(x)
   do.call(fromJSON, c(json.options, list(txt = x)))
 }

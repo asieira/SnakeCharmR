@@ -33,7 +33,7 @@ py.rm <- function(var.name, stopOnException = FALSE) {
   
   # try to read the stored exception
   exception = rcpp_Py_get_var("_SnakeCharmR_exception")
-  if (!is.na(exception)) {
+  if (length(exception) != 0) {
     rcpp_Py_run_code("del _SnakeCharmR_exception")
     if (stopOnException)
       stop(exception)

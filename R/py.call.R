@@ -80,7 +80,7 @@ py.call <- function(fname, ...,
 
   # get return value
   retval <- rcpp_Py_get_var("_SnakeCharmR_return")
-  if (is.na(retval))
+  if (length(retval) == 0)
     stop("Cannot find function call return value")
   else
     py.rm("_SnakeCharmR_return")
