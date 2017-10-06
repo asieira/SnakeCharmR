@@ -45,3 +45,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_SnakeCharmR_rcpp_Py_Initialize", (DL_FUNC) &_SnakeCharmR_rcpp_Py_Initialize, 0},
+    {"_SnakeCharmR_rcpp_Py_Finalize", (DL_FUNC) &_SnakeCharmR_rcpp_Py_Finalize, 0},
+    {"_SnakeCharmR_rcpp_Py_run_code", (DL_FUNC) &_SnakeCharmR_rcpp_Py_run_code, 1},
+    {"_SnakeCharmR_rcpp_Py_get_var", (DL_FUNC) &_SnakeCharmR_rcpp_Py_get_var, 1},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_SnakeCharmR(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
+}

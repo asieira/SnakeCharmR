@@ -35,6 +35,7 @@ py.rm <- function(var.name, stopOnException = FALSE) {
   exception = rcpp_Py_get_var("_SnakeCharmR_exception")
   if (length(exception) != 0) {
     rcpp_Py_run_code("del _SnakeCharmR_exception")
+    exception = rawToChar(exception)
     if (stopOnException)
       stop(exception)
     else

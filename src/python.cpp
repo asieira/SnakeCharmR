@@ -10,10 +10,10 @@ using namespace Rcpp;
 #endif
 
 // fix R check warning as per https://github.com/RcppCore/Rcpp/issues/636#issuecomment-280985661
-void R_init_SnakeCharmR(DllInfo* info) {
-  R_registerRoutines(info, NULL, NULL, NULL, NULL);
-  R_useDynamicSymbols(info, TRUE);
-}
+// void R_init_SnakeCharmR(DllInfo* info) {
+//   R_registerRoutines(info, NULL, NULL, NULL, NULL);
+//   R_useDynamicSymbols(info, TRUE);
+// }
 
 // [[Rcpp::export]]
 void rcpp_Py_Initialize() {
@@ -65,10 +65,9 @@ RawVector rcpp_Py_get_var(String varname) {
     throw std::invalid_argument("variable is not a string");
   
   RawVector retval(0);
-  char *ptr = str;
-  while(*ptr != 0)
-    ptr++;
-  while (ptr != str)
-    retval.insert(0, *(--ptr));
+  while (*str != 0) {
+    retval.push_back(*str);
+    str++;
+  }
   return retval;
 }

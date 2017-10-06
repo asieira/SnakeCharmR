@@ -59,6 +59,6 @@ py.get <- function(var.name, json.opt.ret = getOption("SnakeCharmR.json.opt.ret"
     stop(sprintf("Unexpected error reading %s, JSON encoded return value nor exception exist",
                  var.name))
   py.rm("_SnakeCharmR_exception")
-  stop(exception)
+  stop(rawToChar(exception))
 }
 
