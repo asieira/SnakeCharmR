@@ -13,11 +13,11 @@ Imports:
     utils
 License: GPL-2
 SystemRequirements: Python (>= 2.7) and Python headers and libraries
-    (See the INSTALL file)
+    (See the README.md file)
+OS_type: unix
 URL: https://github.com/asieira/SnakeCharmR
 BugReports: https://github.com/asieira/SnakeCharmR/issues
 Suggests:
     testthat (>= 1.0.0)
 LinkingTo: Rcpp
 RoxygenNote: 6.0.1
-Biarch: false
