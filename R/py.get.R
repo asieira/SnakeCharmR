@@ -47,14 +47,14 @@ py.get <- function(var.name, json.opt.ret = getOption("SnakeCharmR.json.opt.ret"
   )
 
   # try to read the return value
-  retval = rcpp_Py_get_var("_SnakeCharmR_return")
+  retval <- rcpp_Py_get_var("_SnakeCharmR_return")
   if (length(retval) != 0) {
     py.rm("_SnakeCharmR_return")
     return(.py.fromJSON(retval, json.opt.ret))
   }
 
   # value does not exist, stop with the exception value
-  exception = rcpp_Py_get_var("_SnakeCharmR_exception")
+  exception <- rcpp_Py_get_var("_SnakeCharmR_exception")
   if (length(exception) == 0)
     stop(sprintf("Unexpected error reading %s, JSON encoded return value nor exception exist",
                  var.name))
