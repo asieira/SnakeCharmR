@@ -2,18 +2,18 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 rcpp_Py_Initialize <- function() {
-    invisible(.Call('SnakeCharmR_rcpp_Py_Initialize', PACKAGE = 'SnakeCharmR'))
+    invisible(.Call(`_SnakeCharmR_rcpp_Py_Initialize`))
 }
 
 rcpp_Py_Finalize <- function() {
-    invisible(.Call('SnakeCharmR_rcpp_Py_Finalize', PACKAGE = 'SnakeCharmR'))
+    invisible(.Call(`_SnakeCharmR_rcpp_Py_Finalize`))
 }
 
 rcpp_Py_run_code <- function(code) {
-    .Call('SnakeCharmR_rcpp_Py_run_code', PACKAGE = 'SnakeCharmR', code)
+    .Call(`_SnakeCharmR_rcpp_Py_run_code`, code)
 }
 
 rcpp_Py_get_var <- function(varname) {
-    .Call('SnakeCharmR_rcpp_Py_get_var', PACKAGE = 'SnakeCharmR', varname)
+    .Call(`_SnakeCharmR_rcpp_Py_get_var`, varname)
 }
 

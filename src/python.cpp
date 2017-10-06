@@ -10,10 +10,10 @@ using namespace Rcpp;
 #endif
 
 // fix R check warning as per https://github.com/RcppCore/Rcpp/issues/636#issuecomment-280985661
-void R_init_SnakeCharmR(DllInfo* info) {
-  R_registerRoutines(info, NULL, NULL, NULL, NULL);
-  R_useDynamicSymbols(info, TRUE);
-}
+// void R_init_SnakeCharmR(DllInfo* info) {
+//   R_registerRoutines(info, NULL, NULL, NULL, NULL);
+//   R_useDynamicSymbols(info, TRUE);
+// }
 
 // [[Rcpp::export]]
 void rcpp_Py_Initialize() {
@@ -46,22 +46,28 @@ int rcpp_Py_run_code(String code) {
 }
 
 // [[Rcpp::export]]
-String rcpp_Py_get_var(String varname) {
+RawVector rcpp_Py_get_var(String varname) {
   PyObject *value = PyDict_GetItemString(PyModule_GetDict(PyImport_AddModule("__main__")),
                                          varname.get_cstring());
   if (value == NULL)
-    return NA_STRING;
+    return RawVector(0);
 
+  char *str;
   if (PyUnicode_Check(value)) {
 #if RCPP_VERSION > Rcpp_Version(0,12,6)
-    String retval(PyBytes_AS_STRING(PyUnicode_AsUTF8String(value)), CE_UTF8);
+    str = PyBytes_AS_STRING(PyUnicode_AsUTF8String(value));
 #else
-    String retval(PyBytes_AS_STRING(PyUnicode_AsUTF8String(value)));
-    retval.set_encoding("UTF-8");
+    str = PyBytes_AS_STRING(PyUnicode_AsUTF8String(value));
 #endif
-    return retval;
   } else if (PyBytes_Check(value))
-    return String(PyBytes_AS_STRING(value));
+    str = PyBytes_AS_STRING(value);
   else
     throw std::invalid_argument("variable is not a string");
+  
+  RawVector retval(0);
+  while (*str != 0) {
+    retval.push_back(*str);
+    str++;
+  }
+  return retval;
 }

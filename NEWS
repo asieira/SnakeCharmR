@@ -1,5 +1,9 @@
 SnakeCharmR 1.0.7
 =================
+Avoid tripping maximum R string size when reading large data objects from Python. The JSON string
+string read from Python is stored into a raw vector, which is then read with jsonlite's push parser
+through a rawConnection.
+
 Should now compile on Windows using the Rtools Python libraries or the standard Python
 package. Many thanks to Matthew Fidler (https://github.com/mattfidler), his help was invaluable
 in helping implement and test this.
