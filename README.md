@@ -33,6 +33,11 @@ In order to compile this on Windows, make sure you meet the following requiremen
 
 -   Ensure the `python` command from the desired Python version is the first one in your PATH.
 
+-   Install the package from source:
+
+        library(devtools)
+        install_github("asieira/SnakeCharmR")
+
 If you want to use the (very outdated) Python bundled with Rtools on a 64-bit system, for example, you would need to add `c:\Rtools\mingw_64\opt\bin` to your PATH and possibly set `PYTHONHOME` to `c:\Rtools\mingw_64\opt`.
 
 It is recommended, however, that you install and use the [official Python distribution for Windows](https://www.python.org/downloads/windows/).
