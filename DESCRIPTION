@@ -14,7 +14,7 @@ Imports:
 License: GPL-2
 SystemRequirements: Python (>= 2.7) and Python headers and libraries
     (See the README.md file)
-OS_type: unix
+# OS_type: unix
 URL: https://github.com/asieira/SnakeCharmR
 BugReports: https://github.com/asieira/SnakeCharmR/issues
 Suggests:
