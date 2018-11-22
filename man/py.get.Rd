@@ -4,7 +4,8 @@
 \alias{py.get}
 \title{Get values from Python variables to R}
 \usage{
-py.get(var.name, json.opt.ret = getOption("SnakeCharmR.json.opt.ret", list()))
+py.get(var.name, json.opt.ret = getOption("SnakeCharmR.json.opt.ret",
+  list()))
 }
 \arguments{
 \item{var.name}{a character string containing a valid Python variable name}

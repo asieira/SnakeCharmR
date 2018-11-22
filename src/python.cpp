@@ -17,9 +17,9 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 void rcpp_Py_Initialize() {
-#if !defined(_WIN32) && !defined(WIN32)
-  dlopen( PYTHONLIBFILE, RTLD_NOW | RTLD_GLOBAL );		// Passed as a macro at compile time
-#endif
+//#if !defined(_WIN32) && !defined(WIN32)
+//  dlopen( PYTHONLIBFILE, RTLD_NOW | RTLD_GLOBAL );		// Passed as a macro at compile time
+//#endif
   
   Py_Initialize();
   PyRun_SimpleString("import json");
