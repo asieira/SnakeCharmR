@@ -2,8 +2,6 @@ SnakeCharmR 1.0.8
 =================
 Remove dynamic loading of Python and use static only instead, since `python-config --ldflags` already includes static linking.
 
-Updated RStudio project to use `--preclean` when installing and building;
-
 No longer assume Python interpreter is the first on the PATH and base it on the `python-config --prefix` location.
 
 Rolled back changes done in 1.0.7 to handle large strings due to performance issues.

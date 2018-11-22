@@ -4,7 +4,6 @@ using namespace Rcpp;
 #include <string.h>
 #include <bytesobject.h>
 
-#define register 
 #include <Python.h>
 
 // [[Rcpp::export]]
