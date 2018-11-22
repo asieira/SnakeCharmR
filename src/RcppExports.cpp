@@ -35,7 +35,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // rcpp_Py_get_var
-RawVector rcpp_Py_get_var(String varname);
+String rcpp_Py_get_var(String varname);
 RcppExport SEXP _SnakeCharmR_rcpp_Py_get_var(SEXP varnameSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

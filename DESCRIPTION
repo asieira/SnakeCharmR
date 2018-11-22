@@ -13,7 +13,6 @@ Imports:
     utils
 License: GPL-2
 SystemRequirements: 
-    C++98
     Python (>= 2.7) and Python headers and libraries (See the README.md file)
 # OS_type: unix
 URL: https://github.com/asieira/SnakeCharmR
