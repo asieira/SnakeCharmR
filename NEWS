@@ -6,6 +6,8 @@ No longer assume Python interpreter is the first on the PATH and base it on the 
 
 Rolled back changes done in 1.0.7 to handle large strings due to performance issues.
 
+You can now use environment variable SNAKECHARMR_PYTHONPATH to override PYTHONPATH during installation. This should help fix some installation problems in environments with multiple Python versions installed.
+
 
 SnakeCharmR 1.0.7
 =================
