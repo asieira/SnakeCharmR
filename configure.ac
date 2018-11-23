@@ -7,7 +7,7 @@ AC_CONFIG_SRCDIR([src])
 if ! test -z "${SNAKECHARMR_PYTHONPATH}"; then
   PYTHONPATH=${SNAKECHARMR_PYTHONPATH}
 elif test -z "${PYTHONPATH}"; then
-  echo "WARNING: it might be necessary to correctly set PYTHONPATH for installation to work"
+  echo "PYTHONPATH is not set, if installation fails you might want to try setting it."
   echo "References:"
   echo "  https://docs.python.org/2/using/cmdline.html#environment-variables"
   echo "  https://docs.python.org/3/using/cmdline.html#environment-variables for more information"
