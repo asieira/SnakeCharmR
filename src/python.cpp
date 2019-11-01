@@ -6,8 +6,22 @@ using namespace Rcpp;
 #include <Python.h>
 #include <bytesobject.h>
 
+#if PY_MAJOR_VERSION >= 3
+wchar_t *SnakeCharmR_program_name = NULL;
+#else
+char *SnakeCharmR_program_name = NULL;
+#endif
+
 // [[Rcpp::export]]
-void rcpp_Py_Initialize() {
+void rcpp_Py_Initialize(String command) {
+  SnakeCharmR_program_name =
+#if PY_MAJOR_VERSION >= 3
+    Py_DecodeLocale(command.get_cstring(), NULL);
+#else
+    strdup(command.get_cstring());
+#endif
+
+  Py_SetProgramName(SnakeCharmR_program_name);
   Py_Initialize();
   PyRun_SimpleString("import json");
   PyRun_SimpleString("import traceback");
@@ -17,6 +31,14 @@ void rcpp_Py_Initialize() {
 // [[Rcpp::export]]
 void rcpp_Py_Finalize() {
   Py_Finalize();
+  if (SnakeCharmR_program_name != NULL) {
+#if PY_MAJOR_VERSION >= 3
+    PyMem_RawFree(SnakeCharmR_program_name);
+#else
+    free(SnakeCharmR_program_name);
+#endif
+    SnakeCharmR_program_name = NULL;
+  }
 }
 
 // [[Rcpp::export]]

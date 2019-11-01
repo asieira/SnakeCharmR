@@ -8,6 +8,10 @@ Rolled back changes done in 1.0.7 to handle large strings due to performance iss
 
 You can now use environment variable SNAKECHARMR_PYTHONPATH to override PYTHONPATH during installation. This should help fix some installation problems in environments with multiple Python versions installed.
 
+Fixed a problem compiling with Python 3.7 due to C header order.
+
+Added call to Py_SetProgramName.
+
 
 SnakeCharmR 1.0.7
 =================

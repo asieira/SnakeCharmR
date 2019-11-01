@@ -16,7 +16,7 @@
 }
 
 .onLoad <- function(libname, pkgname) {
-  rcpp_Py_Initialize()
+  rcpp_Py_Initialize(commandArgs()[1])
 }
 
 .onUnload <- function(libpath) {

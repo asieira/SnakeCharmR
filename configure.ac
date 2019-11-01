@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 # This file is based on configure.ac file distributed along with the rJava package
 
-AC_INIT(SnakeCharmR, 1.0.7, alexandre.sieira@gmail.com)
+AC_INIT(SnakeCharmR, 1.0.8, alexandre.sieira@gmail.com)
 AC_CONFIG_SRCDIR([src])
 
 if ! test -z "${SNAKECHARMR_PYTHONPATH}"; then
@@ -43,8 +43,6 @@ echo PKG_LIBS=$PKG_LIBS
 
 PKG_CPPFLAGS=`${PYTHON_CONFIG} --includes`
 echo PKG_CPPFLAGS=$PKG_CPPFLAGS
-
-#PKG_CPPFLAGS+=" -D PYTHONLIBFILE=\\\"libpython${SNAKECHARMR_PYTHON_VERSION}.so\\\""
 
 AC_SUBST(PKG_LIBS)
 AC_SUBST(PKG_CPPFLAGS)
