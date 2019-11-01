@@ -56,6 +56,14 @@ environment:
 #      GCC_PATH: mingw_64
 #      PYTHONHOME: c:\Python27-x64
 
+    - PATH: C:\Python37;%PATH%
+      R_ARCH: i386
+      GCC_PATH: mingw_32
+    
+    - PATH: C:\Python37-x64;%PATH%
+      R_ARCH: x64
+      GCC_PATH: mingw_64
+
     - PATH: C:\Python36;%PATH%
       R_ARCH: i386
       GCC_PATH: mingw_32
