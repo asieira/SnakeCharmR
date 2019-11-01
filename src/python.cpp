@@ -2,9 +2,9 @@
 using namespace Rcpp;
 
 #include <string.h>
-#include <bytesobject.h>
 
 #include <Python.h>
+#include <bytesobject.h>
 
 // [[Rcpp::export]]
 void rcpp_Py_Initialize() {
