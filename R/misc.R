@@ -16,7 +16,7 @@
 }
 
 .onLoad <- function(libname, pkgname) {
-  rcpp_Py_Initialize()
+  rcpp_Py_Initialize(commandArgs()[1])
 }
 
 .onUnload <- function(libpath) {
@@ -38,9 +38,5 @@
 }
 
 .py.fromJSON <- function(x, json.options = list()) {
-  if (is.raw(x)) {
-    x <- rawConnection(x)
-    on.exit(close(x))
-  }
   do.call(fromJSON, c(json.options, list(txt = x)))
 }

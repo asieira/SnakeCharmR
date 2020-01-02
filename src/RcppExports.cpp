@@ -6,11 +6,12 @@
 using namespace Rcpp;
 
 // rcpp_Py_Initialize
-void rcpp_Py_Initialize();
-RcppExport SEXP _SnakeCharmR_rcpp_Py_Initialize() {
+void rcpp_Py_Initialize(String command);
+RcppExport SEXP _SnakeCharmR_rcpp_Py_Initialize(SEXP commandSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_Py_Initialize();
+    Rcpp::traits::input_parameter< String >::type command(commandSEXP);
+    rcpp_Py_Initialize(command);
     return R_NilValue;
 END_RCPP
 }
@@ -35,7 +36,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // rcpp_Py_get_var
-RawVector rcpp_Py_get_var(String varname);
+String rcpp_Py_get_var(String varname);
 RcppExport SEXP _SnakeCharmR_rcpp_Py_get_var(SEXP varnameSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -47,7 +48,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_SnakeCharmR_rcpp_Py_Initialize", (DL_FUNC) &_SnakeCharmR_rcpp_Py_Initialize, 0},
+    {"_SnakeCharmR_rcpp_Py_Initialize", (DL_FUNC) &_SnakeCharmR_rcpp_Py_Initialize, 1},
     {"_SnakeCharmR_rcpp_Py_Finalize", (DL_FUNC) &_SnakeCharmR_rcpp_Py_Finalize, 0},
     {"_SnakeCharmR_rcpp_Py_run_code", (DL_FUNC) &_SnakeCharmR_rcpp_Py_run_code, 1},
     {"_SnakeCharmR_rcpp_Py_get_var", (DL_FUNC) &_SnakeCharmR_rcpp_Py_get_var, 1},

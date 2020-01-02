@@ -4,8 +4,9 @@
 \alias{py.call}
 \title{Calls Python functions and methods from R}
 \usage{
-py.call(fname, ..., json.opt.args = getOption("SnakeCharmR.json.opt.args",
-  list(auto_unbox = TRUE, null = "null")),
+py.call(fname, ...,
+  json.opt.args = getOption("SnakeCharmR.json.opt.args", list(auto_unbox
+  = TRUE, null = "null")),
   json.opt.ret = getOption("SnakeCharmR.json.opt.ret", list()))
 }
 \arguments{

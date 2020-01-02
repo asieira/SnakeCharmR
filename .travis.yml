@@ -11,8 +11,6 @@ os:
   - linux
   - osx
 
-brew_packages: python3
-
 addons:
   apt:
     packages:
@@ -20,6 +18,10 @@ addons:
       - python
       - python3-dev
       - python3
+  homebrew:
+    packages:
+      - python@2
+      - python
 
 env:
   - SNAKECHARMR_PYTHON_VERSION=2

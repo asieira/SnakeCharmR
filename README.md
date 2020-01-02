@@ -1,18 +1,16 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 [![Travis-CI Build
 Status](https://travis-ci.org/asieira/SnakeCharmR.svg?branch=master)](https://travis-ci.org/asieira/SnakeCharmR)
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/asieira/SnakeCharmR?branch=master&svg=true)](https://ci.appveyor.com/project/asieira/SnakeCharmR)
 [![codecov](https://codecov.io/gh/asieira/SnakeCharmR/branch/master/graph/badge.svg)](https://codecov.io/gh/asieira/SnakeCharmR)
-[![](https://cranlogs.r-pkg.org/badges/grand-total/SnakeCharmR)](https://cran.rstudio.com/web/packages/SnakeCharmR/index.html)
-[![Dependency
-Status](https://dependencyci.com/github/asieira/SnakeCharmR/badge)](https://dependencyci.com/github/asieira/SnakeCharmR)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/SnakeCharmR)](https://CRAN.R-project.org/package=SnakeCharmR)
 
 <img src="tools/snaker.jpg" width="33%"/>
 
-SnakeCharmR
------------
+## SnakeCharmR
 
 Modern overhaul of `rPython`, read more on the motivation and benefits
 of using it in [this blog
@@ -24,7 +22,7 @@ ground.
 
 ### LINUX AND UNIX-LIKE SYSTEMS
 
-In order to compile SnakeCharmR, you’ll need to have Python &gt;= 2.7
+In order to compile SnakeCharmR, you’ll need to have Python \>= 2.7
 installed. Make sure you also have the development libraries and include
 files, the operating system package names will vary with your specific
 Linux distribution.
@@ -41,9 +39,9 @@ minor versions.
 For example, if you set `SNAKECHARMR_PYTHON_VERSION=3.2` then Python 3.2
 will be used. In this example, you will need to ensure:
 
--   that `python3.2` and `python3.2-config` exist and are in the PATH;
+  - that `python3.2` and `python3.2-config` exist and are in the PATH;
 
--   that a `libpython3.2.so` exists at the locations indicated by
+  - that a `libpython3.2.so` exists at the locations indicated by
     `python3.2-config --ldflags`.
 
 ### WINDOWS SYSTEMS
@@ -51,15 +49,15 @@ will be used. In this example, you will need to ensure:
 In order to compile this on Windows, make sure you meet the following
 requirements:
 
--   Install the latest version of
+  - Install the latest version of
     [Rtools](https://cran.r-project.org/bin/windows/Rtools/);
 
--   Ensure the `python` command from the desired Python version is the
+  - Ensure the `python` command from the desired Python version is the
     first one in your PATH.
 
--   Install the package from source:
+  - Install the package from source:
 
-<!-- -->
+<!-- end list -->
 
     library(devtools)
     install_github("asieira/SnakeCharmR")

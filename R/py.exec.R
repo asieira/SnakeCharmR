@@ -47,8 +47,7 @@ py.exec <- function(code, stopOnException = TRUE) {
 
   # try to read the stored exception
   exception = rcpp_Py_get_var("_SnakeCharmR_exception")
-  if (length(exception) != 0) {
-    exception <- rawToChar(exception)
+  if (!is.na(exception)) {
     py.rm("_SnakeCharmR_exception")
     if (stopOnException)
       stop(exception)
